@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import values from "./Data/values";
+import AddVideo from "./component/AddVideo";
+import VideoList from "./component/VideoList";
 
 function App() {
+  console.log("Render App");
+  const [value, setValue] = useState(values);
+
+  function addValues(newValue) {
+    setValue([...value, { ...newValue, id: value.length + 1 }]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" onClick={() => console.log("App")}>
+      <AddVideo addNewValue={addValues}></AddVideo>
+      <VideoList values={value}></VideoList>
     </div>
   );
 }
